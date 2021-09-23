@@ -4,7 +4,10 @@ var rect = document.getElementById('svg').getBoundingClientRect(); // get the bo
 const width = Number(rect.width);
 const height = Number(rect.height);
 
-const projection = d3.geoMercator().scale(250).translate([ width / 2, height / 2 ]);
+const projection = d3
+	.geoMercator()
+	.scale(250)
+	.translate([width / 2, height / 2]);
 const pathGenerator = d3.geoPath().projection(projection);
 
 d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then((data) => {
@@ -13,9 +16,12 @@ d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then((
 	console.log(countries);
 
 	const paths = svg.selectAll('path').data(countries.features);
-	paths.enter().append('path').attr('d', (d) => pathGenerator(d));
+	paths
+		.enter()
+		.append('path')
+		.attr('d', (d) => pathGenerator(d));
 
-	$('path').on('click', function() {
+	$('path').on('click', function () {
 		console.log(countries.features[$('path').index(this)].properties.name);
 	});
 });
@@ -37,7 +43,6 @@ class Player {
 const names = [
 	'Garry Chess',
 	'Hans',
-	'Hitler',
 	'Ghandi',
 	'Joe Biden',
 	'Trump',
@@ -46,5 +51,5 @@ const names = [
 	'Han Solo',
 	'Zevs',
 	'Lege i alt',
-	'Franklin'
+	'Franklin',
 ];
