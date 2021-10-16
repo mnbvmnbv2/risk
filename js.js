@@ -12,18 +12,20 @@ const pathGenerator = d3.geoPath().projection(projection);
 
 const data = JSON.parse(mapjson);
 
-const countries = topojson.feature(data, data.objects.countries);
+//TOPO
+//const collection = topojson.feature(data, data.objects.collection);
+//
 
-console.log(countries);
+console.log(data);
 
-const paths = svg.selectAll('path').data(countries.features);
+const paths = svg.selectAll('path').data(data.features);
 paths
 	.enter()
 	.append('path')
 	.attr('d', (d) => pathGenerator(d));
 
 $('path').on('click', function () {
-	console.log(countries.features[$('path').index(this)].properties.name);
+	console.log(data.features[$('path').index(this)].properties.name);
 });
 
 //GAME
